@@ -1,0 +1,1647 @@
+<!DOCTYPE html>
+<html lang="es-419">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>[Tu marca] — Páginas web con QR y NFC para tu negocio</title>
+<meta name="description" content="Creamos tu página web profesional con QR y NFC incluidos. Menús digitales, tiendas online, reservas y métricas reales con Google Analytics.">
+<style>
+:root{
+  --ink:#111214; --gray-1:#5b616b; --gray-2:#8a919c; --line:#e4e6ea;
+  --bg:#ffffff; --bg-soft:#f6f7f9; --accent:#2563eb; --accent-soft:#eaf1fe;
+  --radius:14px; --max:1120px;
+  --font:"Segoe UI",system-ui,-apple-system,Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+section{padding:72px 0}
+.eyebrow{font-size:13px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+h1{font-size:clamp(32px,5vw,52px);line-height:1.1;font-weight:800;letter-spacing:-.01em}
+h2{font-size:clamp(26px,3.4vw,38px);line-height:1.15;font-weight:800;letter-spacing:-.01em}
+h3{font-size:19px;font-weight:700}
+.lead{font-size:clamp(16px,2vw,19px);color:var(--gray-1);max-width:640px}
+.center{text-align:center}.center .lead{margin:14px auto 0}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;border:0;border-radius:10px;padding:14px 26px;font-size:16px;font-weight:600;cursor:pointer;transition:transform .15s ease,opacity .15s ease;font-family:inherit}
+.btn:hover{transform:translateY(-2px);opacity:.92}
+.btn.ghost{background:transparent;color:var(--ink);border:1.5px solid var(--ink)}
+.btn.light{background:#fff;color:var(--ink)}
+.muted{color:var(--gray-1)}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.nav-in{max-width:var(--max);margin:0 auto;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.logo{font-size:19px;font-weight:800;display:flex;align-items:center;gap:8px}
+.logo .dot{width:10px;height:10px;border-radius:3px;background:var(--accent)}
+.nav-links{display:flex;gap:26px;font-size:15px;font-weight:500;color:var(--gray-1)}
+.nav-links a:hover{color:var(--ink)}
+@media(max-width:760px){.nav-links{display:none}}
+
+/* HERO */
+.hero{background:linear-gradient(180deg,var(--bg-soft),#fff);padding:88px 0 72px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero .lead{margin:18px 0 28px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-badges{display:flex;gap:20px;flex-wrap:wrap;margin-top:34px;font-size:14px;color:var(--gray-1)}
+.hero-badges span{display:flex;align-items:center;gap:7px}
+.tick{width:18px;height:18px;flex:none}
+.phone{background:var(--ink);border-radius:28px;padding:14px;box-shadow:0 30px 60px -25px rgba(17,18,20,.45);max-width:320px;margin:0 auto;transform:rotate(2deg)}
+.phone-scr{background:#fff;border-radius:18px;overflow:hidden}
+.phone-top{background:var(--accent-soft);padding:18px 16px}
+.phone-top .t{font-size:12px;color:var(--accent);font-weight:700}
+.phone-top .n{font-size:18px;font-weight:800;margin-top:2px}
+.phone-body{padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.p-item{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
+.p-item b{font-size:13.5px}
+.p-item small{color:var(--gray-2);display:block;font-size:11.5px}
+.p-cta{background:var(--ink);color:#fff;text-align:center;border-radius:10px;padding:11px;font-size:13.5px;font-weight:600}
+.qr-float{position:absolute;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 16px 40px -18px rgba(17,18,20,.3);font-size:12px;color:var(--gray-1)}
+.qr-float b{display:block;color:var(--ink);font-size:13px;margin-top:6px}
+.hero-visual{position:relative}
+@media(max-width:860px){.hero-grid{grid-template-columns:1fr}.hero-visual{margin-top:12px}}
+
+/* TRUST */
+.trust{border-block:1px solid var(--line)}
+.trust-in{display:grid;grid-template-columns:repeat(3,1fr);gap:0}
+.trust-in>div{padding:22px 24px;display:flex;gap:12px;align-items:flex-start;font-size:14.5px;color:var(--gray-1)}
+.trust-in>div+div{border-left:1px solid var(--line)}
+.trust-in b{color:var(--ink);display:block;font-size:15px;margin-bottom:2px}
+.icon{width:22px;height:22px;flex:none;color:var(--accent);margin-top:2px}
+@media(max-width:760px){.trust-in{grid-template-columns:1fr}.trust-in>div+div{border-left:0;border-top:1px solid var(--line)}}
+
+/* RUBROS */
+.layout{display:grid;grid-template-columns:230px 1fr;gap:20px;align-items:start;margin-top:36px}
+.chips{display:flex;flex-direction:column;gap:6px}
+.chip{display:flex;align-items:center;gap:9px;text-align:left;padding:10px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--gray-1);font-size:14px;font-weight:500;cursor:pointer;transition:all .15s ease;font-family:inherit}
+.chip:hover{color:var(--ink);border-color:var(--gray-2)}
+.chip.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.panel{border:1px solid var(--line);border-radius:var(--radius);padding:26px;background:#fff;transition:opacity .15s ease}
+.panel.fade{opacity:0}
+.kick{font-size:12.5px;color:var(--gray-2);text-transform:uppercase;letter-spacing:.06em;font-weight:600;margin-bottom:2px}
+.ptype{font-size:21px;font-weight:800;margin-bottom:6px}
+.pdesc{font-size:15px;color:var(--gray-1);margin-bottom:20px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:12px;overflow:hidden;margin-bottom:20px}
+.stat{padding:16px}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat .lab{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--gray-2);margin-bottom:5px}
+.stat .num{font-size:30px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1.1}
+.chartbox{border:1px solid var(--line);border-radius:12px;padding:16px;margin-bottom:20px;background:var(--bg-soft)}
+.charthead{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px;flex-wrap:wrap}
+.charthead .t{font-size:14.5px;font-weight:700}
+.seg{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:#fff}
+.seg button{border:0;background:transparent;color:var(--gray-1);font-size:12.5px;padding:5px 12px;cursor:pointer;font-family:inherit}
+.seg button.on{background:var(--ink);color:#fff}
+.cap{font-size:12.5px;color:var(--gray-2);margin-top:10px;line-height:1.5}
+.feats{display:grid;grid-template-columns:1fr 1fr;gap:10px 20px}
+.feat{display:flex;gap:9px;align-items:flex-start;font-size:14px;color:var(--gray-1)}
+.feat .tick{margin-top:2px;color:var(--accent)}
+@media(max-width:860px){.layout{grid-template-columns:1fr}.chips{flex-direction:row;flex-wrap:wrap}.stats{grid-template-columns:1fr}.stat+.stat{border-left:0;border-top:1px solid var(--line)}.feats{grid-template-columns:1fr}}
+
+/* PLANES */
+.plans-sec{background:var(--bg-soft)}
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:40px}
+.plan{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px;display:flex;flex-direction:column;position:relative}
+.plan.hot{border:2px solid var(--ink);box-shadow:0 24px 50px -30px rgba(17,18,20,.35)}
+.badge{position:absolute;top:-12px;left:22px;background:var(--accent);color:#fff;font-size:11.5px;font-weight:700;padding:3px 10px;border-radius:999px}
+.pname{font-size:17px;font-weight:800;margin:2px 0 4px}
+.pdesc{font-size:13.5px;color:var(--gray-1);margin-bottom:16px;min-height:40px}
+.price{font-size:34px;font-weight:800;font-variant-numeric:tabular-nums}
+.pold{font-size:13.5px;color:var(--gray-2);margin:3px 0 18px}
+ul.f{list-style:none;display:flex;flex-direction:column;gap:9px;margin-bottom:22px}
+ul.f li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;color:var(--gray-1)}
+ul.f li .tick{margin-top:2px;color:var(--accent)}
+.plan .btn{margin-top:auto;justify-content:center}
+.plan .btn.ghost:hover{background:var(--ink);color:#fff}
+.plans-note{text-align:center;font-size:13px;color:var(--gray-2);margin-top:22px}
+@media(max-width:860px){.plans{grid-template-columns:1fr;max-width:440px;margin-left:auto;margin-right:auto}}
+
+/* PASOS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:40px;counter-reset:s}
+.step{border:1px solid var(--line);border-radius:var(--radius);padding:22px;position:relative;background:#fff}
+.step::before{counter-increment:s;content:counter(s);display:flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:10px;background:var(--ink);color:#fff;font-weight:800;font-size:15px;margin-bottom:14px}
+.step h3{font-size:15.5px;margin-bottom:6px}
+.step p{font-size:13.5px;color:var(--gray-1)}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.steps{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{max-width:760px;margin:36px auto 0}
+details{border:1px solid var(--line);border-radius:12px;margin-bottom:10px;background:#fff}
+summary{padding:16px 20px;font-weight:600;font-size:15.5px;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font-size:20px;color:var(--gray-2);font-weight:400}
+details[open] summary::after{content:"–"}
+details p{padding:0 20px 18px;font-size:14.5px;color:var(--gray-1)}
+
+/* CTA FINAL */
+.final{background:var(--ink);color:#fff;text-align:center}
+.final h2{color:#fff}
+.final .lead{color:#b9bec7;margin:16px auto 30px}
+.final .btn{margin:0 6px}
+
+/* FOOTER */
+footer{padding:36px 0;border-top:1px solid var(--line);font-size:13.5px;color:var(--gray-2)}
+.foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;align-items:center}
+.foot-in a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <a class="logo" href="#"><span class="dot"></span>[Tu marca]</a>
+    <div class="nav-links">
+      <a href="#rubros">Rubros</a>
+      <a href="#beneficios">Beneficios</a>
+      <a href="#planes">Planes</a>
+      <a href="#pasos">Cómo funciona</a>
+      <a href="#faq">Preguntas</a>
+    </div>
+    <a class="btn" style="padding:10px 18px;font-size:14px" href="#contacto">Pedir mi página</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Páginas web + QR + NFC</div>
+      <h1>Tu negocio en el bolsillo de tus clientes</h1>
+      <p class="lead">Te creamos una página web profesional con códigos QR y tags NFC físicos incluidos. Tus clientes te encuentran, te reservan y te dejan reseñas con un toque — y vos medís todo con datos reales.</p>
+      <div class="hero-actions">
+        <a class="btn" href="#planes">Ver planes y precios</a>
+        <a class="btn ghost" href="#rubros">Ver mi rubro</a>
+      </div>
+      <div class="hero-badges">
+        <span><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M19.3 5.9 9.7 18.1 4.7 12.9" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Entrega en 5 a 10 días</span>
+        <span><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M19.3 5.9 9.7 18.1 4.7 12.9" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>QR y NFC físicos incluidos</span>
+        <span><svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M19.3 5.9 9.7 18.1 4.7 12.9" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>Sin sabores técnicos</span>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="phone">
+        <div class="phone-scr">
+          <div class="phone-top">
+            <div class="t">RESTAURANTE · MENÚ DIGITAL</div>
+            <div class="n">Casa [Tu marca]</div>
+          </div>
+          <div class="phone-body">
+            <div class="p-item"><div><b>Milanesa completa</b><small>Con guarnición · más pedido</small></div><b>$9.500</b></div>
+            <div class="p-item"><div><b>Wok de verduras</b><small>Opción vegana</small></div><b>$8.200</b></div>
+            <div class="p-item"><div><b>Cheesecake</b><small>Postre de la casa</small></div><b>$5.400</b></div>
+            <div class="p-cta">Reservar mesa</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="trust" id="beneficios">
+  <div class="wrap trust-in">
+    <div>
+      <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M4 4v14h16M7 14l3-4 3 2 4-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><b>Métricas reales incluidas</b>Acceso a Google Analytics: sabés cuánta gente entra, desde dónde y qué mira.</div>
+    </div>
+    <div>
+      <svg class="icon" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7.5-4.6-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.4-8.5 9-8.5 9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+      <div><b>Reseñas con un toque</b>Los tags NFC llevan a tus clientes directo a dejarte reseña en Google.</div>
+    </div>
+    <div>
+      <svg class="icon" viewBox="0 0 24 24" fill="none"><rect x="4" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="2"/><rect x="14" y="4" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="2"/><rect x="4" y="14" width="6" height="6" rx="1.5" stroke="currentColor" stroke-width="2"/><path d="M14 14h3v3h-3zM20 14v.01M14 20h.01M20 17v.01M20 20v.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <div><b>QR + NFC físicos</b>Te entregamos todo impreso y configurado: del mostrador o la mesa a tu web.</div>
+    </div>
+  </div>
+</div>
+
+<section id="rubros">
+  <div class="wrap center">
+    <div class="eyebrow">Para todo tipo de negocio</div>
+    <h2>Tu rubro, tu página, tus resultados medibles</h2>
+    <p class="lead">Elegí tu rubro y mirá qué tipo de página te armamos, qué métricas podrías controlar desde el primer mes y cómo el QR y el NFC convierten visitas en clientes.</p>
+  </div>
+  <div class="wrap layout">
+    <div class="chips" id="chips"></div>
+    <div class="panel" id="panel"></div>
+  </div>
+</section>
+
+
+<section id="demo" style="background:linear-gradient(180deg,#f6f7f9,#ffffff);padding:72px 0">
+  <div class="wrap center">
+    <div class="eyebrow">Ver ejemplo real</div>
+    <h2>Así se ve una página de restaurante hecha con nosotros</h2>
+    <p class="lead">Deslizá o navegá dentro del simulador. Esto es una página real funcional, no una imagen.</p>
+  </div>
+  <div class="wrap" style="margin-top:40px">
+    <style>
+      .demo-stage{display:flex;flex-direction:column;align-items:center;gap:24px}
+      .device-toolbar{display:flex;gap:10px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:6px;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+      .device-toolbar button{border:0;background:transparent;padding:8px 18px;border-radius:999px;font-size:13.5px;font-weight:600;font-family:inherit;cursor:pointer;color:var(--gray-1);transition:all .15s ease}
+      .device-toolbar button.on{background:var(--ink);color:#fff}
+      .device-frame{background:var(--ink);border-radius:24px;padding:14px 14px 18px;box-shadow:0 40px 80px -30px rgba(17,18,20,.45);transition:all .5s cubic-bezier(.22,.61,.36,1);width:100%;max-width:1100px}
+      .device-frame.phone{max-width:380px;padding:12px 12px 24px;border-radius:36px}
+      .device-screen{background:#fff;border-radius:14px;overflow:hidden;position:relative}
+      .device-frame.phone .device-screen{border-radius:28px;height:680px}
+      .device-frame.desktop .device-screen{height:580px}
+      .device-screen iframe{width:100%;height:100%;border:0;display:block}
+      .device-notch{width:90px;height:22px;background:var(--ink);border-radius:0 0 16px 16px;margin:0 auto 10px}
+      .device-frame.desktop .device-notch{display:none}
+      .device-home{width:36px;height:4px;background:rgba(255,255,255,.25);border-radius:999px;margin:14px auto 0}
+      .device-frame.desktop .device-home{display:none}
+      .device-hint{font-size:12.5px;color:var(--gray-2);margin-top:8px;text-align:center}
+    </style>
+    <div class="demo-stage">
+      <div class="device-toolbar">
+        <button class="on" onclick="setDevice('desktop',this)">💻 Laptop</button>
+        <button onclick="setDevice('phone',this)">📱 Celular</button>
+      </div>
+      <div class="device-frame desktop" id="deviceFrame">
+        <div class="device-notch"></div>
+        <div class="device-screen">
+          <iframe srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;es&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;title&gt;TIZÓN — Parrilla de autor&lt;/title&gt;
+&lt;meta name=&quot;description&quot; content=&quot;TIZÓN. Hamburguesas a las brasas de quebracho. Carne madurada, pan horneado a diario, cuatro recetas fijas.&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.googleapis.com&quot;&gt;
+&lt;link rel=&quot;preconnect&quot; href=&quot;https://fonts.gstatic.com&quot; crossorigin&gt;
+&lt;link href=&quot;https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Inter:wght@300;400;500;600&amp;display=swap&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;style&gt;
+  :root {
+    --bg: #0a0a0a;
+    --bg-elevated: #111111;
+    --bg-card: #141414;
+    --line: rgba(244,241,234,0.08);
+    --line-hover: rgba(244,241,234,0.18);
+    --ink: #f4f1ea;
+    --ink-dim: #a39e93;
+    --ink-faint: #6b655c;
+    --accent: #c17f45;
+    --accent-bright: #d9965a;
+    --accent-deep: #8a5a2b;
+    --maxw: 1200px;
+    --pad: clamp(28px, 6vw, 80px);
+    --radius: 2px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-slow: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: &#x27;Inter&#x27;, sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+  ul { list-style: none; }
+
+  h1, h2, h3, h4 {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  :focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* ---------- GRAIN ---------- */
+  body::before {
+    content: &quot;&quot;;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url(&quot;data:image/svg+xml,%3Csvg viewBox=&#x27;0 0 256 256&#x27; xmlns=&#x27;http://www.w3.org/2000/svg&#x27;%3E%3Cfilter id=&#x27;n&#x27;%3E%3CfeTurbulence type=&#x27;fractalNoise&#x27; baseFrequency=&#x27;0.85&#x27; numOctaves=&#x27;3&#x27; stitchTiles=&#x27;stitch&#x27;/%3E%3C/filter%3E%3Crect width=&#x27;100%25&#x27; height=&#x27;100%25&#x27; filter=&#x27;url(%23n)&#x27;/%3E%3C/svg%3E&quot;);
+    mix-blend-mode: overlay;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 32px var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: padding 0.5s var(--ease), background-color 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
+  }
+
+  .nav.is-scrolled {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-logo span { color: var(--accent); font-weight: 500; }
+
+  .nav-links {
+    display: flex;
+    gap: 44px;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.4s var(--ease);
+  }
+
+  .nav-links a::after {
+    content: &quot;&quot;;
+    position: absolute;
+    left: 50%; right: 50%;
+    bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+    transition: left 0.4s var(--ease), right 0.4s var(--ease);
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after,
+  .nav-links a.is-active::after { left: 0; right: 0; }
+  .nav-links a.is-active { color: var(--ink); }
+
+  .nav-cta {
+    border: 1px solid var(--line-hover);
+    padding: 10px 24px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease), color 0.4s var(--ease);
+  }
+
+  .nav-cta:hover {
+    border-color: var(--accent);
+    background: rgba(193,127,69,0.08);
+    color: var(--accent-bright);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .nav-toggle span {
+    width: 20px; height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  .nav-toggle[aria-expanded=&quot;true&quot;] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded=&quot;true&quot;] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded=&quot;true&quot;] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-drawer {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.6s var(--ease-slow), opacity 0.4s var(--ease);
+    visibility: hidden;
+  }
+
+  .mobile-drawer.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-drawer a {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    transform: scale(1.08);
+    transition: transform 1.8s var(--ease-slow);
+  }
+
+  .hero.is-ready .hero-img { transform: scale(1); }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.2) 35%, rgba(10,10,10,0.92) 90%),
+      linear-gradient(90deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.1) 50%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--pad);
+    padding-bottom: clamp(60px, 10vw, 120px);
+    max-width: 720px;
+  }
+
+  .hero-overline {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.8s var(--ease) 0.2s, transform 0.8s var(--ease) 0.2s;
+  }
+
+  .hero.is-ready .hero-overline { opacity: 1; transform: translateY(0); }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 7vw, 5.6rem);
+    line-height: 1.05;
+    font-weight: 500;
+  }
+
+  .hero-title .row {
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero-title .row span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1s var(--ease);
+  }
+
+  .hero.is-ready .hero-title .row span { transform: translateY(0); }
+  .hero.is-ready .hero-title .row:nth-child(1) span { transition-delay: 0.35s; }
+  .hero.is-ready .hero-title .row:nth-child(2) span { transition-delay: 0.45s; }
+  .hero.is-ready .hero-title .row:nth-child(3) span { transition-delay: 0.55s; color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 32px;
+    max-width: 420px;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s var(--ease) 0.8s, transform 0.9s var(--ease) 0.8s;
+  }
+
+  .hero.is-ready .hero-sub { opacity: 1; transform: translateY(0); }
+
+  .hero-actions {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s var(--ease) 1s, transform 0.9s var(--ease) 1s;
+  }
+
+  .hero.is-ready .hero-actions { opacity: 1; transform: translateY(0); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 16px 36px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    display: inline-block;
+    transition: background-color 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(193,127,69,0.2);
+  }
+
+  .link-underline {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    border-bottom: 1px solid var(--line-hover);
+    padding-bottom: 4px;
+    transition: color 0.4s var(--ease), border-color 0.4s var(--ease);
+  }
+
+  .link-underline:hover { color: var(--ink); border-color: var(--accent); }
+
+  .hero-meta {
+    position: absolute;
+    z-index: 2;
+    right: var(--pad);
+    bottom: clamp(60px, 10vw, 120px);
+    text-align: right;
+    display: none;
+  }
+
+  .hero-meta-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+
+  .hero-meta-value {
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+    line-height: 1.8;
+  }
+
+  @media (min-width: 900px) { .hero-meta { display: block; } }
+
+  /* ---------- SECTIONS ---------- */
+  section { position: relative; }
+  .section-pad { padding: clamp(100px, 14vw, 180px) 0; }
+
+  .section-head {
+    max-width: 560px;
+    margin-bottom: clamp(56px, 7vw, 88px);
+  }
+
+  .section-head h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.08;
+    font-weight: 500;
+  }
+
+  .section-head p {
+    margin-top: 20px;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 440px;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  /* ---------- MENU ---------- */
+  .menu { background: var(--bg); }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--line);
+  }
+
+  .menu-card {
+    background: var(--bg);
+    padding: clamp(32px, 4vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    transition: background 0.5s var(--ease);
+    cursor: pointer;
+  }
+
+  .menu-card:hover { background: var(--bg-elevated); }
+
+  .menu-card-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+
+  .menu-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .menu-card:hover .menu-card-img img { transform: scale(1.05); }
+
+  .menu-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .menu-card-name {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+    font-weight: 500;
+  }
+
+  .menu-card-price {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .menu-card-tagline {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-dim);
+    margin-top: 4px;
+  }
+
+  .menu-card-desc {
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 48ch;
+  }
+
+  .menu-card-toggle {
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--line);
+    width: 100%;
+    text-align: left;
+    transition: color 0.4s var(--ease), border-color 0.4s var(--ease);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .menu-card-toggle::after {
+    content: &quot;+&quot;;
+    font-size: 1rem;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .menu-card.is-open .menu-card-toggle::after { transform: rotate(45deg); }
+  .menu-card:hover .menu-card-toggle { color: var(--ink); border-color: var(--line-hover); }
+
+  .menu-card-extra {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s var(--ease);
+  }
+
+  .menu-card.is-open .menu-card-extra { grid-template-rows: 1fr; }
+
+  .menu-card-extra-inner {
+    overflow: hidden;
+  }
+
+  .menu-card-extra-inner p {
+    padding-top: 16px;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  @media (max-width: 800px) {
+    .menu-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- HISTORIA ---------- */
+  .historia { background: var(--bg-elevated); }
+
+  .historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 7vw, 100px);
+    align-items: center;
+  }
+
+  .historia-img {
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    position: relative;
+  }
+
+  .historia-img::after {
+    content: &quot;&quot;;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.4) 100%);
+  }
+
+  .historia-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .historia-quote {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    line-height: 1.2;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .historia-quote span { color: var(--accent); font-style: normal; }
+
+  .historia-text {
+    margin-top: 28px;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 44ch;
+  }
+
+  .historia-text + .historia-text { margin-top: 16px; }
+
+  @media (max-width: 800px) {
+    .historia-grid { grid-template-columns: 1fr; }
+    .historia-img { aspect-ratio: 16/10; order: -1; }
+  }
+
+  /* ---------- VISITANOS ---------- */
+  .visitanos { background: var(--bg); }
+
+  .visitanos-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .info-block + .info-block { margin-top: 48px; }
+
+  .info-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+
+  .info-value {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink-dim);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  .hours-row span:first-child { color: var(--ink-dim); }
+  .hours-row span:last-child { color: var(--ink-faint); }
+
+  .form-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(32px, 4vw, 48px);
+  }
+
+  .form-row { margin-bottom: 24px; }
+
+  .form-row label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-row input,
+  .form-row textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  }
+
+  .form-row input::placeholder,
+  .form-row textarea::placeholder { color: var(--ink-faint); opacity: 0.5; }
+
+  .form-row input:focus,
+  .form-row textarea:focus {
+    border-color: var(--accent);
+    background: rgba(193,127,69,0.03);
+    outline: none;
+  }
+
+  .form-row.has-error input { border-color: #b44; }
+
+  .form-error {
+    display: none;
+    color: #b44;
+    font-size: 0.78rem;
+    margin-top: 8px;
+    font-weight: 400;
+  }
+
+  .form-row.has-error .form-error { display: block; }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 16px;
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background-color 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(193,127,69,0.18);
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .form-success.is-visible { display: block; }
+  .form-card.is-sent .form-fields { display: none; }
+
+  .form-success h3 {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .form-success p { color: var(--ink-dim); font-size: 0.95rem; font-weight: 300; line-height: 1.7; }
+
+  @media (max-width: 800px) {
+    .visitanos-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--line);
+    padding: 56px 0 36px;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .footer-logo {
+    font-family: &#x27;Playfair Display&#x27;, serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .footer-links a { transition: color 0.4s var(--ease); }
+  .footer-links a:hover { color: var(--ink); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 24px;
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    font-weight: 300;
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 800px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+  }
+&lt;/style&gt;
+&lt;base target=&quot;_blank&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;header class=&quot;nav&quot; id=&quot;siteNav&quot;&gt;
+  &lt;a href=&quot;#top&quot; class=&quot;nav-logo&quot;&gt;TIZ&lt;span&gt;Ó&lt;/span&gt;N&lt;/a&gt;
+  &lt;ul class=&quot;nav-links&quot; id=&quot;navLinks&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;#carta&quot; data-nav&gt;La carta&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#historia&quot; data-nav&gt;Historia&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;#visitanos&quot; data-nav&gt;Visitanos&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;div style=&quot;display:flex; align-items:center; gap:20px;&quot;&gt;
+    &lt;a href=&quot;#visitanos&quot; class=&quot;nav-cta&quot;&gt;Reservar&lt;/a&gt;
+    &lt;button class=&quot;nav-toggle&quot; id=&quot;navToggle&quot; aria-label=&quot;Abrir menú&quot; aria-expanded=&quot;false&quot; aria-controls=&quot;mobileDrawer&quot;&gt;
+      &lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;&lt;span&gt;&lt;/span&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+
+&lt;div class=&quot;mobile-drawer&quot; id=&quot;mobileDrawer&quot;&gt;
+  &lt;a href=&quot;#carta&quot;&gt;La carta&lt;/a&gt;
+  &lt;a href=&quot;#historia&quot;&gt;Historia&lt;/a&gt;
+  &lt;a href=&quot;#visitanos&quot;&gt;Visitanos&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;section class=&quot;hero&quot; id=&quot;top&quot;&gt;
+  &lt;img class=&quot;hero-img&quot; src=&quot;https://images.unsplash.com/photo-1544025162-d76694265947?q=80&amp;w=1800&amp;auto=format&amp;fit=crop&quot; alt=&quot;Brasas de parrilla con fuego intenso sobre carbón&quot;&gt;
+  &lt;div class=&quot;hero-overlay&quot;&gt;&lt;/div&gt;
+  &lt;div class=&quot;hero-content&quot;&gt;
+    &lt;p class=&quot;hero-overline&quot;&gt;Parrilla de autor — Palermo&lt;/p&gt;
+    &lt;h1 class=&quot;hero-title&quot;&gt;
+      &lt;span class=&quot;row&quot;&gt;&lt;span&gt;El fuego&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;row&quot;&gt;&lt;span&gt;no negocia&lt;/span&gt;&lt;/span&gt;
+      &lt;span class=&quot;row&quot;&gt;&lt;span&gt;con el sabor.&lt;/span&gt;&lt;/span&gt;
+    &lt;/h1&gt;
+    &lt;p class=&quot;hero-sub&quot;&gt;Carne madurada, pan horneado cada mañana y brasas de quebracho como único método. Cuatro recetas fijas, ninguna a medias.&lt;/p&gt;
+    &lt;div class=&quot;hero-actions&quot;&gt;
+      &lt;a href=&quot;#carta&quot; class=&quot;btn-primary&quot;&gt;Ver la carta&lt;/a&gt;
+      &lt;a href=&quot;#visitanos&quot; class=&quot;link-underline&quot;&gt;Reservar mesa&lt;/a&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;hero-meta&quot;&gt;
+    &lt;div class=&quot;hero-meta-label&quot;&gt;Ubicación&lt;/div&gt;
+    &lt;div class=&quot;hero-meta-value&quot;&gt;Gorriti 4820, Palermo&lt;br&gt;Martes a domingo, desde las 12:00&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;menu section-pad&quot; id=&quot;carta&quot;&gt;
+  &lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;section-head reveal&quot;&gt;
+      &lt;span class=&quot;section-label&quot;&gt;La carta&lt;/span&gt;
+      &lt;h2&gt;Cuatro recetas, ningún atajo.&lt;/h2&gt;
+      &lt;p&gt;No hay carta de temporada ni especiales del chef. Elegimos cuatro y las sostenemos, todos los días, de la misma forma.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;menu-grid&quot; id=&quot;menuGrid&quot;&gt;
+
+      &lt;div class=&quot;menu-card reveal&quot;&gt;
+        &lt;div class=&quot;menu-card-img&quot;&gt;
+          &lt;img src=&quot;https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&amp;w=900&amp;auto=format&amp;fit=crop&quot; alt=&quot;El Fundador: doble smash con cheddar derretido sobre superficie oscura&quot;&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;menu-card-top&quot;&gt;
+            &lt;span class=&quot;menu-card-name&quot;&gt;El Fundador&lt;/span&gt;
+            &lt;span class=&quot;menu-card-price&quot;&gt;$8.900&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;menu-card-tagline&quot;&gt;La receta original, sin vueltas.&lt;/p&gt;
+          &lt;p class=&quot;menu-card-desc&quot;&gt;Doble smash de 120 g, cheddar añejo, cebolla caramelizada a fuego lento y salsa ahumada de la casa, en pan de papa dorado en manteca.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;menu-card-toggle&quot; aria-expanded=&quot;false&quot;&gt;Conocé su historia&lt;/button&gt;
+        &lt;div class=&quot;menu-card-extra&quot;&gt;
+          &lt;div class=&quot;menu-card-extra-inner&quot;&gt;
+            &lt;p&gt;Es la hamburguesa con la que abrimos, en 2016, en una parrilla de dos mesas. Nunca la tocamos: si algo funciona, no se arregla.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;menu-card reveal&quot;&gt;
+        &lt;div class=&quot;menu-card-img&quot;&gt;
+          &lt;img src=&quot;https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&amp;w=900&amp;auto=format&amp;fit=crop&quot; alt=&quot;La Provocadora: hamburguesa doble con bacon crujiente y queso fundido&quot;&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;menu-card-top&quot;&gt;
+            &lt;span class=&quot;menu-card-name&quot;&gt;La Provocadora&lt;/span&gt;
+            &lt;span class=&quot;menu-card-price&quot;&gt;$9.800&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;menu-card-tagline&quot;&gt;Para quienes piden picante sin preguntar.&lt;/p&gt;
+          &lt;p class=&quot;menu-card-desc&quot;&gt;Carne de novillo, bacon ahumado veinte horas, provoleta a la parrilla, rúcula fresca y chimichurri picante hecho a mano cada mañana.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;menu-card-toggle&quot; aria-expanded=&quot;false&quot;&gt;Conocé su historia&lt;/button&gt;
+        &lt;div class=&quot;menu-card-extra&quot;&gt;
+          &lt;div class=&quot;menu-card-extra-inner&quot;&gt;
+            &lt;p&gt;El chimichurri lleva ají de nuestra huerta. Avisamos del picor, pero rara vez alguien nos hace caso.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;menu-card reveal&quot;&gt;
+        &lt;div class=&quot;menu-card-img&quot;&gt;
+          &lt;img src=&quot;https://images.pexels.com/photos/21820165/pexels-photo-21820165.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=900&quot; alt=&quot;Trufa y Hongos: hamburguesa elegante con hongos salteados y rúcula&quot;&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;menu-card-top&quot;&gt;
+            &lt;span class=&quot;menu-card-name&quot;&gt;Trufa &amp;amp; Hongos&lt;/span&gt;
+            &lt;span class=&quot;menu-card-price&quot;&gt;$11.200&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;menu-card-tagline&quot;&gt;La favorita de quienes no piden término medio.&lt;/p&gt;
+          &lt;p class=&quot;menu-card-desc&quot;&gt;Medallón de carne madurada, hongos de pino salteados en manteca, mayonesa de trufa negra y queso gruyère fundido bajo la parrilla.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;menu-card-toggle&quot; aria-expanded=&quot;false&quot;&gt;Conocé su historia&lt;/button&gt;
+        &lt;div class=&quot;menu-card-extra&quot;&gt;
+          &lt;div class=&quot;menu-card-extra-inner&quot;&gt;
+            &lt;p&gt;Compramos los hongos por kilo, una vez por semana, a un solo productor. Cuando se terminan, se termina la hamburguesa por ese día.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;menu-card reveal&quot;&gt;
+        &lt;div class=&quot;menu-card-img&quot;&gt;
+          &lt;img src=&quot;https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&amp;w=900&amp;auto=format&amp;fit=crop&quot; alt=&quot;Brasas del Sur: hamburguesa simple sobre bandeja de madera oscura&quot;&gt;
+        &lt;/div&gt;
+        &lt;div&gt;
+          &lt;div class=&quot;menu-card-top&quot;&gt;
+            &lt;span class=&quot;menu-card-name&quot;&gt;Brasas del Sur&lt;/span&gt;
+            &lt;span class=&quot;menu-card-price&quot;&gt;$10.500&lt;/span&gt;
+          &lt;/div&gt;
+          &lt;p class=&quot;menu-card-tagline&quot;&gt;La más honesta: carne, fuego y pan. Nada más.&lt;/p&gt;
+          &lt;p class=&quot;menu-card-desc&quot;&gt;Carne de pastura madurada 21 días, cebolla morada tostada directo al carbón y pan de papa apenas tostado en manteca de hierbas.&lt;/p&gt;
+        &lt;/div&gt;
+        &lt;button class=&quot;menu-card-toggle&quot; aria-expanded=&quot;false&quot;&gt;Conocé su historia&lt;/button&gt;
+        &lt;div class=&quot;menu-card-extra&quot;&gt;
+          &lt;div class=&quot;menu-card-extra-inner&quot;&gt;
+            &lt;p&gt;Ninguna salsa. La probamos así primero, en la cocina, y decidimos no arruinarla.&lt;/p&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;historia section-pad&quot; id=&quot;historia&quot;&gt;
+  &lt;div class=&quot;wrap historia-grid&quot;&gt;
+    &lt;div class=&quot;historia-img reveal&quot;&gt;
+      &lt;img src=&quot;https://images.unsplash.com/photo-1558030006-450675393462?q=80&amp;w=1200&amp;auto=format&amp;fit=crop&quot; alt=&quot;Hamburguesa en construcción, capas de ingredientes suspendidas en el aire&quot;&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;reveal&quot;&gt;
+      &lt;span class=&quot;section-label&quot;&gt;Nuestra historia&lt;/span&gt;
+      &lt;p class=&quot;historia-quote&quot;&gt;No apuramos el fuego. &lt;span&gt;El fuego apura al sabor.&lt;/span&gt;&lt;/p&gt;
+      &lt;p class=&quot;historia-text&quot;&gt;TIZÓN nació de una idea simple: una parrilla no necesita más de cuatro hamburguesas si las cuatro están bien hechas. Todo se cocina sobre brasas de quebracho, sin gas y sin atajos.&lt;/p&gt;
+      &lt;p class=&quot;historia-text&quot;&gt;El pan se hornea todas las mañanas en el local. La carne se compra entera y madura en cámara propia. Lo que no podemos controlar, no entra a la cocina.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;section class=&quot;visitanos section-pad&quot; id=&quot;visitanos&quot;&gt;
+  &lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;section-head reveal&quot;&gt;
+      &lt;span class=&quot;section-label&quot;&gt;Reservas&lt;/span&gt;
+      &lt;h2&gt;Visitanos.&lt;/h2&gt;
+      &lt;p&gt;Sin delivery propio, sin apuro. La mesa se disfruta acá.&lt;/p&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;visitanos-grid&quot;&gt;
+      &lt;div class=&quot;reveal&quot;&gt;
+        &lt;div class=&quot;info-block&quot;&gt;
+          &lt;div class=&quot;info-label&quot;&gt;Dirección&lt;/div&gt;
+          &lt;div class=&quot;info-value&quot;&gt;Gorriti 4820, Palermo&lt;br&gt;Buenos Aires, Argentina&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;info-block&quot;&gt;
+          &lt;div class=&quot;info-label&quot;&gt;Horarios&lt;/div&gt;
+          &lt;div class=&quot;hours-row&quot;&gt;&lt;span&gt;Martes a jueves&lt;/span&gt;&lt;span&gt;12:00 – 23:00&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;hours-row&quot;&gt;&lt;span&gt;Viernes y sábado&lt;/span&gt;&lt;span&gt;12:00 – 00:30&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;hours-row&quot;&gt;&lt;span&gt;Domingo&lt;/span&gt;&lt;span&gt;12:00 – 22:00&lt;/span&gt;&lt;/div&gt;
+          &lt;div class=&quot;hours-row&quot;&gt;&lt;span&gt;Lunes&lt;/span&gt;&lt;span&gt;Cerrado&lt;/span&gt;&lt;/div&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;info-block&quot;&gt;
+          &lt;div class=&quot;info-label&quot;&gt;Contacto&lt;/div&gt;
+          &lt;div class=&quot;info-value&quot;&gt;+54 9 11 2345-6789&lt;br&gt;@tizon.baires&lt;/div&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+
+      &lt;div class=&quot;form-card reveal&quot; id=&quot;formCard&quot;&gt;
+        &lt;div class=&quot;form-fields&quot;&gt;
+          &lt;form id=&quot;reserveForm&quot; novalidate&gt;
+            &lt;div class=&quot;form-row&quot; data-field=&quot;nombre&quot;&gt;
+              &lt;label for=&quot;f-nombre&quot;&gt;Nombre&lt;/label&gt;
+              &lt;input type=&quot;text&quot; id=&quot;f-nombre&quot; name=&quot;nombre&quot; autocomplete=&quot;name&quot; placeholder=&quot;A nombre de quién&quot;&gt;
+              &lt;p class=&quot;form-error&quot;&gt;Contanos a nombre de quién es la mesa.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-grid&quot;&gt;
+              &lt;div class=&quot;form-row&quot; data-field=&quot;fecha&quot;&gt;
+                &lt;label for=&quot;f-fecha&quot;&gt;Fecha&lt;/label&gt;
+                &lt;input type=&quot;date&quot; id=&quot;f-fecha&quot; name=&quot;fecha&quot;&gt;
+                &lt;p class=&quot;form-error&quot;&gt;Elegí una fecha.&lt;/p&gt;
+              &lt;/div&gt;
+              &lt;div class=&quot;form-row&quot; data-field=&quot;hora&quot;&gt;
+                &lt;label for=&quot;f-hora&quot;&gt;Hora&lt;/label&gt;
+                &lt;input type=&quot;time&quot; id=&quot;f-hora&quot; name=&quot;hora&quot;&gt;
+                &lt;p class=&quot;form-error&quot;&gt;Elegí un horario.&lt;/p&gt;
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;form-row&quot; data-field=&quot;personas&quot;&gt;
+              &lt;label for=&quot;f-personas&quot;&gt;Cantidad de personas&lt;/label&gt;
+              &lt;input type=&quot;number&quot; id=&quot;f-personas&quot; name=&quot;personas&quot; min=&quot;1&quot; max=&quot;12&quot; placeholder=&quot;Ej: 4&quot;&gt;
+              &lt;p class=&quot;form-error&quot;&gt;Decinos para cuántas personas es.&lt;/p&gt;
+            &lt;/div&gt;
+            &lt;button type=&quot;submit&quot; class=&quot;btn-submit&quot;&gt;Confirmar reserva&lt;/button&gt;
+          &lt;/form&gt;
+        &lt;/div&gt;
+        &lt;div class=&quot;form-success&quot; id=&quot;formSuccess&quot;&gt;
+          &lt;h3&gt;Reserva recibida.&lt;/h3&gt;
+          &lt;p id=&quot;formSuccessDetail&quot;&gt;&lt;/p&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+&lt;footer&gt;
+  &lt;div class=&quot;wrap&quot;&gt;
+    &lt;div class=&quot;footer-top&quot;&gt;
+      &lt;div class=&quot;footer-logo&quot;&gt;TIZ&lt;span&gt;Ó&lt;/span&gt;N&lt;/div&gt;
+      &lt;ul class=&quot;footer-links&quot;&gt;
+        &lt;li&gt;&lt;a href=&quot;#carta&quot;&gt;La carta&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#historia&quot;&gt;Historia&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&quot;#visitanos&quot;&gt;Visitanos&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;footer-bottom&quot;&gt;
+      &lt;span&gt;© 2026 TIZÓN. Parrilla de autor, Palermo.&lt;/span&gt;
+      &lt;span&gt;Gorriti 4820, Buenos Aires&lt;/span&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+&lt;script&gt;
+(function(){
+  &quot;use strict&quot;;
+
+  // ---- Sticky nav ----
+  var nav = document.getElementById(&#x27;siteNav&#x27;);
+  function onScroll(){
+    if (window.scrollY &gt; 60) { nav.classList.add(&#x27;is-scrolled&#x27;); }
+    else { nav.classList.remove(&#x27;is-scrolled&#x27;); }
+  }
+  document.addEventListener(&#x27;scroll&#x27;, onScroll, { passive: true });
+  onScroll();
+
+  // ---- Mobile drawer ----
+  var toggle = document.getElementById(&#x27;navToggle&#x27;);
+  var drawer = document.getElementById(&#x27;mobileDrawer&#x27;);
+  function closeDrawer(){
+    drawer.classList.remove(&#x27;is-open&#x27;);
+    toggle.setAttribute(&#x27;aria-expanded&#x27;, &#x27;false&#x27;);
+  }
+  toggle.addEventListener(&#x27;click&#x27;, function(){
+    var open = drawer.classList.toggle(&#x27;is-open&#x27;);
+    toggle.setAttribute(&#x27;aria-expanded&#x27;, open ? &#x27;true&#x27; : &#x27;false&#x27;);
+  });
+  drawer.querySelectorAll(&#x27;a&#x27;).forEach(function(a){
+    a.addEventListener(&#x27;click&#x27;, closeDrawer);
+  });
+
+  // ---- Hero entrance ----
+  var hero = document.querySelector(&#x27;.hero&#x27;);
+  requestAnimationFrame(function(){
+    setTimeout(function(){ hero.classList.add(&#x27;is-ready&#x27;); }, 100);
+  });
+
+  // ---- Scrollspy ----
+  var navLinks = document.querySelectorAll(&#x27;[data-nav]&#x27;);
+  var sections = [&#x27;carta&#x27;,&#x27;historia&#x27;,&#x27;visitanos&#x27;].map(function(id){ return document.getElementById(id); });
+  if (&#x27;IntersectionObserver&#x27; in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove(&#x27;is-active&#x27;); });
+          var match = document.querySelector(&#x27;[data-nav][href=&quot;#&#x27; + entry.target.id + &#x27;&quot;]&#x27;);
+          if (match) { match.classList.add(&#x27;is-active&#x27;); }
+        }
+      });
+    }, { rootMargin: &#x27;-40% 0px -40% 0px&#x27; });
+    sections.forEach(function(s){ if (s) { spy.observe(s); } });
+  }
+
+  // ---- Menu accordion ----
+  document.querySelectorAll(&#x27;.menu-card&#x27;).forEach(function(card){
+    var toggleBtn = card.querySelector(&#x27;.menu-card-toggle&#x27;);
+    toggleBtn.addEventListener(&#x27;click&#x27;, function(e){
+      e.stopPropagation();
+      var isOpen = card.classList.toggle(&#x27;is-open&#x27;);
+      toggleBtn.setAttribute(&#x27;aria-expanded&#x27;, isOpen ? &#x27;true&#x27; : &#x27;false&#x27;);
+      toggleBtn.textContent = isOpen ? &#x27;Cerrar&#x27; : &#x27;Conocé su historia&#x27;;
+    });
+    card.addEventListener(&#x27;click&#x27;, function(){
+      var isOpen = card.classList.toggle(&#x27;is-open&#x27;);
+      toggleBtn.setAttribute(&#x27;aria-expanded&#x27;, isOpen ? &#x27;true&#x27; : &#x27;false&#x27;);
+      toggleBtn.textContent = isOpen ? &#x27;Cerrar&#x27; : &#x27;Conocé su historia&#x27;;
+    });
+  });
+
+  // ---- Scroll reveal ----
+  if (&#x27;IntersectionObserver&#x27; in window){
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add(&#x27;is-visible&#x27;);
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: &#x27;0px 0px -40px 0px&#x27; });
+    document.querySelectorAll(&#x27;.reveal&#x27;).forEach(function(el){
+      revealObserver.observe(el);
+    });
+  } else {
+    document.querySelectorAll(&#x27;.reveal&#x27;).forEach(function(el){
+      el.classList.add(&#x27;is-visible&#x27;);
+    });
+  }
+
+  // ---- Reservation form ----
+  var form = document.getElementById(&#x27;reserveForm&#x27;);
+  var card = document.getElementById(&#x27;formCard&#x27;);
+  var successDetail = document.getElementById(&#x27;formSuccessDetail&#x27;);
+
+  function fieldRow(name){ return form.querySelector(&#x27;[data-field=&quot;&#x27; + name + &#x27;&quot;]&#x27;); }
+
+  form.addEventListener(&#x27;submit&#x27;, function(e){
+    e.preventDefault();
+    var nombre = form.nombre.value.trim();
+    var fecha = form.fecha.value;
+    var hora = form.hora.value;
+    var personas = form.personas.value;
+
+    var valid = true;
+    [
+      [&#x27;nombre&#x27;, nombre],
+      [&#x27;fecha&#x27;, fecha],
+      [&#x27;hora&#x27;, hora],
+      [&#x27;personas&#x27;, personas]
+    ].forEach(function(pair){
+      var row = fieldRow(pair[0]);
+      if (!pair[1]){
+        row.classList.add(&#x27;has-error&#x27;);
+        valid = false;
+      } else {
+        row.classList.remove(&#x27;has-error&#x27;);
+      }
+    });
+
+    if (!valid) { return; }
+
+    var fechaLegible = fecha;
+    try {
+      var d = new Date(fecha + &#x27;T00:00:00&#x27;);
+      fechaLegible = d.toLocaleDateString(&#x27;es-AR&#x27;, { day: &#x27;numeric&#x27;, month: &#x27;long&#x27; });
+    } catch(err){}
+
+    successDetail.textContent = &#x27;Te esperamos, &#x27; + nombre + &#x27;, el &#x27; + fechaLegible + &#x27; a las &#x27; + hora + &#x27; para &#x27; + personas + (personas === &#x27;1&#x27; ? &#x27; persona.&#x27; : &#x27; personas.&#x27;) + &#x27; Te confirmamos por WhatsApp.&#x27;;
+    card.classList.add(&#x27;is-sent&#x27;);
+    document.getElementById(&#x27;formSuccess&#x27;).classList.add(&#x27;is-visible&#x27;);
+  });
+
+})();
+&lt;/script&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+" title="Demo página de restaurante" loading="lazy"></iframe>
+        </div>
+        <div class="device-home"></div>
+      </div>
+      <p class="device-hint">Tip: hacé clic dentro del simulador y navegá como si fuera tu página. También podés <a href="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1800" target="_blank" style="color:var(--accent);text-decoration:underline">abrir en pantalla completa</a>.</p>
+    </div>
+    <script>
+      function setDevice(mode,btn){
+        var frame=document.getElementById('deviceFrame');
+        frame.classList.remove('desktop','phone');
+        frame.classList.add(mode);
+        btn.parentNode.querySelectorAll('button').forEach(function(b){b.classList.remove('on')});
+        btn.classList.add('on');
+      }
+    </script>
+  </div>
+</section>
+
+<section class="plans-sec" id="planes">
+  <div class="wrap center">
+    <div class="eyebrow">Planes y precios</div>
+    <h2>Un precio claro, sin sorpresas</h2>
+    <p class="lead">Todos los planes incluyen diseño profesional, dominio, hosting por un año y los QR impresos + tags NFC listos para usar.</p>
+    <div class="plans" style="text-align:left">
+      <div class="plan">
+        <div class="pname">Menú QR esencial</div>
+        <p class="pdesc">Para arrancar rápido con el menú digital en mesa.</p>
+        <div class="price">[$120.000]</div>
+        <div class="pold">pago único</div>
+        <ul class="f" data-f="1"></ul>
+        <a class="btn ghost" href="#contacto">Elegir esencial</a>
+      </div>
+      <div class="plan hot">
+        <span class="badge">Más elegido</span>
+        <div class="pname">Negocio completo</div>
+        <p class="pdesc">Menú o catálogo + reseñas NFC + métricas reales.</p>
+        <div class="price">[$220.000]</div>
+        <div class="pold">pago único</div>
+        <ul class="f" data-f="2"></ul>
+        <a class="btn" href="#contacto">Elegir completo</a>
+      </div>
+      <div class="plan">
+        <div class="pname">Full con reservas y pedidos</div>
+        <p class="pdesc">Todo lo anterior más motor de reservas y pedidos online.</p>
+        <div class="price">[$350.000]</div>
+        <div class="pold">pago único</div>
+        <ul class="f" data-f="3"></ul>
+        <a class="btn ghost" href="#contacto">Elegir full</a>
+      </div>
+    </div>
+    <p class="plans-note">Mantenimiento mensual opcional desde [$15.000]: actualizaciones, soporte y reportes. <b>Precios de referencia — ajustalos a tu mercado.</b></p>
+  </div>
+</section>
+
+<section id="pasos">
+  <div class="wrap center">
+    <div class="eyebrow">Cómo funciona</div>
+    <h2>De la charla a tu página online en 6 pasos</h2>
+  </div>
+  <div class="wrap steps">
+    <div class="step"><h3>Conversamos</h3><p>Una charla de 15 minutos o por mensaje para entender tu negocio y qué querés lograr.</p></div>
+    <div class="step"><h3>Envías tus materiales</h3><p>Logo, carta o catálogo, fotos y colores de tu marca. Todo por WhatsApp o Drive.</p></div>
+    <div class="step"><h3>Diseñamos y desarrollamos</h3><p>En 5 a 10 días hábiles tenés tu página lista, con QR y NFC configurados.</p></div>
+    <div class="step"><h3>Revisás y ajustamos</h3><p>La ves en tu celular, pedís los cambios que quieras y los aplicamos.</p></div>
+    <div class="step"><h3>Entrega y capacitación</h3><p>Te damos acceso, los QR y NFC físicos, y te enseñamos a editar lo básico solo.</p></div>
+    <div class="step"><h3>Seguimiento</h3><p>Control a los 7 días y mantenimiento mensual opcional con reportes de resultados.</p></div>
+  </div>
+</section>
+
+<section id="faq" style="padding-top:0">
+  <div class="wrap center">
+    <div class="eyebrow">Preguntas frecuentes</div>
+    <h2>Lo que todos preguntan antes de arrancar</h2>
+  </div>
+  <div class="wrap faq">
+    <details open><summary>¿Necesito saber de tecnología para usarla?</summary><p>No. La página queda lista para usar y te enseñamos a hacer los cambios básicos (precios, fotos, textos) desde tu celular en una videollamada corta.</p></details>
+    <details><summary>¿Qué son los QR y NFC que incluyen los planes?</summary><p>Son códigos QR impresos y tags NFC programados que apuntan a tu página. Los ponés en mesas, mostrador, vidriera o etiquetas y tus clientes acceden con un escaneo o un toque.</p></details>
+    <details><summary>¿Puedo ver cuánta gente entra a mi página?</summary><p>Sí. Todos los planes incluyen acceso a Google Analytics: ves cuántas personas entran, de dónde vienen (QR, NFC, Google, redes) y qué sección miran.</p></details>
+    <details><summary>¿El dominio y el hosting están incluidos?</summary><p>Sí, por un año completo. Después podés renovar con nosotros o llevarte todo a donde quieras: la página es tuya.</p></details>
+    <details><summary>¿Cuánto tarda la entrega?</summary><p>Entre 5 y 10 días hábiles según el plan, contados desde que aprobás el diseño y enviás todos los materiales.</p></details>
+    <details><summary>¿Trabajan con mi rubro si no está en la lista?</summary><p>Sí. La sección de rubros muestra los más pedidos, pero el sistema se adapta a cualquier negocio. Escribinos y te contamos cómo quedaría el tuyo.</p></details>
+  </div>
+</section>
+
+<section class="final" id="contacto">
+  <div class="wrap">
+    <div class="eyebrow" style="color:#7ea6f8">Empezá hoy</div>
+    <h2>Tu negocio merece verse profesional</h2>
+    <p class="lead">Escribinos y en menos de 24 horas te respondemos con una propuesta y una demo de cómo quedaría tu página.</p>
+    <a class="btn light" href="https://wa.me/5490000000000?text=Hola!%20Quiero%20una%20p%C3%A1gina%20web%20con%20QR%20y%20NFC%20para%20mi%20negocio." target="_blank" rel="noopener">Escribir por WhatsApp</a>
+    <a class="btn ghost" style="color:#fff;border-color:#fff" href="mailto:hola@[tumarca].com">hola@[tumarca].com</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <a class="logo" href="#"><span class="dot"></span>[Tu marca]</a>
+    <div>Páginas web con QR y NFC · © 2026 · Todos los derechos reservados</div>
+    <div><a href="#planes">Planes</a> · <a href="#faq">Preguntas</a> · <a href="#contacto">Contacto</a></div>
+  </div>
+</footer>
+
+<script>
+var CK='<svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M19.3027 5.9053C19.6542 5.55397 20.2247 5.55388 20.5761 5.9053C20.9273 6.25675 20.9273 6.82734 20.5761 7.17874L9.65911 18.0948C9.30773 18.4461 8.73814 18.446 8.38665 18.0948L3.42376 13.1328C3.0726 12.7814 3.07263 12.2118 3.42376 11.8604C3.77524 11.509 4.34575 11.5089 4.6972 11.8604L9.02239 16.1856L19.3027 5.9053Z" fill="currentColor"/></svg>';
+var LC='<svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M4 4v14h16M7 14l3-4 3 2 4-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+var MB='<svg class="tick" viewBox="0 0 24 24" fill="none"><rect x="7" y="2.5" width="10" height="19" rx="2.5" stroke="currentColor" stroke-width="2"/><path d="M10.5 18.5h3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>';
+var LK='<svg class="tick" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7.5-4.6-9.5-9C1 8.5 3 5 6.5 5c2 0 3.5 1 4.5 2.5C12 6 13.5 5 15.5 5 19 5 21 8.5 20.5 12c-1 4.4-8.5 9-8.5 9Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>';
+
+var R=[
+ {n:'Restaurantes y cafeterías',t:'Menú digital con QR en mesa',d:'Carta siempre actualizada: cambiás precios y platos en minutos sin reimprimir nada. El cliente escanea, mira, pide y te deja su reseña.',v:2400,e:1850,r:96,f:['Menú con fotos, precios y alérgenos, editable al instante','QR en mesas y NFC en mostrador para reseñas de Google','Botón de pedido o reserva directa desde el menú','Medís qué platos se miran más y desde qué mesa']},
+ {n:'Tienda de ropa online',t:'Catálogo con carrito de compras',d:'Vendé 24/7 con fotos, talles y stock real. El QR en etiquetas y packaging lleva a tu tienda desde cualquier lugar físico.',v:5300,e:1240,r:74,f:['Catálogo con talles, colores y stock actualizado','Carrito y pagos integrados, ventas automáticas','QR en etiquetas, bolsas y packaging','Métricas de productos más vistos']},
+ {n:'Peluquerías y barberías',t:'Reservas online 24/7',d:'Tu agenda se llena sola: el cliente elige servicio, profesional y horario, y recibe recordatorio automático. NFC en el espejo para reseñas.',v:1700,e:640,r:78,f:['Agenda con turnos online sin llamadas','Recordatorios automáticos que reducen ausencias','NFC en espejos: reseña de Google con un toque','Galería de trabajos que vende por vos']},
+ {n:'Gimnasios y entrenadores',t:'Planes, clases y reservas',d:'Presentá tus planes con precios claros, dejá reservar clases y captá leads con el QR en el acceso y en tus redes.',v:2900,e:480,r:64,f:['Planes y precios claros, sin consultas repetidas','Reserva de clases y cupos en tiempo real','QR en acceso y materiales para captar leads','Métricas de visitas desde redes y del local']},
+ {n:'Clínicas y consultorios',t:'Turnos online y credibilidad',d:'Transmite profesionalismo: turnos online, presentación del equipo y reseñas verificadas en recepción vía NFC.',v:1950,e:720,r:112,f:['Solicitud de turnos online con confirmación','Perfiles del equipo y especialidades','NFC en recepción para reseñas verificadas','Preguntas frecuentes que ahorran llamadas']},
+ {n:'Profesionales y freelance',t:'Portafolio + contacto directo',d:'Tu trabajo habla por vos: portafolio, formulario de presupuesto y contacto directo por WhatsApp desde el QR de tu tarjeta.',v:1200,e:390,r:45,f:['Portafolio de trabajos con casos y resultados','Formulario de presupuesto que filtra clientes','QR en tarjetas y firmas de mail','Sabés de dónde llega cada consulta']},
+ {n:'Hoteles y alojamientos',t:'Reservas directas sin comisiones',d:'Recuperá el margen de las plataformas: reservas directas, galería de habitaciones y NFC en habitaciones con info y reseñas.',v:3800,e:940,r:130,f:['Motor de reservas directas sin comisiones','Galería de habitaciones, servicios y mapa','NFC en habitaciones: info, WiFi y reseñas','Medís en qué canal se genera cada reserva']},
+ {n:'Talleres y servicios',t:'Presupuestos y seguimiento',d:'El cliente pide presupuesto desde el QR en tu vidriera y sigue el estado de su servicio. Las reseñas verificadas cierran la venta.',v:1450,e:510,r:58,f:['Formulario de presupuesto desde el QR del local','Estado del servicio: el cliente mira y no llama','NFC en mostrador para reseñas de Google','Flujo de solicitudes medido mes a mes']}
+];
+
+var F={
+ "1":['Menú digital con fotos, editable cuando quieras','10 QR impresos laminados para mesas','Diseño con tu logo y colores','Entrega en 5 días'],
+ "2":['Todo lo del plan esencial','Tags NFC en mostrador y mesas para reseñas de Google','Botón de reserva o pedido directo','Acceso a Google Analytics: de dónde viene cada cliente','Soporte prioritario por 3 meses'],
+ "3":['Todo lo del plan completo','Motor de reservas con confirmación automática','Pedidos online con aviso por WhatsApp','Reporte mensual de visitas y reseñas','Capacitación por videollamada a tu equipo']
+};
+Object.keys(F).forEach(function(k){
+ document.querySelectorAll('ul.f[data-f="'+k+'"]').forEach(function(ul){
+  ul.innerHTML=F[k].map(function(x){return '<li>'+CK+'<span>'+x+'</span></li>'}).join('');
+ });
+});
+
+var sel=0,days=30;
+var chipsEl=document.getElementById('chips'),panel=document.getElementById('panel');
+
+function series(r,seed){
+ var n=days===30?8:14,out=[],base=r.v*(days===30?1:2.6)/n;
+ for(var i=0;i<n;i++){
+  var w=Math.sin(i*1.3+seed)*0.22+Math.cos(i*0.7+seed*2)*0.12,g=1+i*0.09;
+  out.push(Math.max(4,Math.round(base*g*(1+w))));
+ }
+ return out;
+}
+function fmt(x){return new Intl.NumberFormat('es-AR').format(x)}
+function countUp(el,target){
+ var t0=null,dur=650;
+ function step(ts){
+  if(!t0)t0=ts;
+  var p=Math.min(1,(ts-t0)/dur),e=1-Math.pow(1-p,3);
+  el.textContent=fmt(Math.round(target*e));
+  if(p<1)requestAnimationFrame(step);
+ }
+ requestAnimationFrame(step);
+}
+function renderChart(r,seed){
+ var data=series(r,seed),W=560,H=150,pad=6,max=Math.max.apply(null,data)*1.15;
+ var pts=data.map(function(v,i){
+  var x=pad+i*(W-2*pad)/(data.length-1),y=H-10-(v/max)*(H-24);
+  return [x,y];
+ });
+ var line='M'+pts.map(function(p){return p[0].toFixed(1)+','+p[1].toFixed(1)}).join(' L');
+ var area=line+' L'+(W-pad)+','+(H-8)+' L'+pad+','+(H-8)+' Z';
+ var last=pts[pts.length-1];
+ return '<svg viewBox="0 0 '+W+' '+H+'" style="width:100%;display:block">'
+  +'<path d="'+area+'" fill="rgba(37,99,235,.10)"/>'
+  +'<path id="cl" d="'+line+'" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>'
+  +'<circle cx="'+last[0]+'" cy="'+last[1]+'" r="4" fill="#2563eb"/>'
+  +'<text x="'+(last[0]-4)+'" y="'+(last[1]-12)+'" text-anchor="end" font-size="13" font-weight="600" fill="#111214">'+fmt(data[data.length-1])+' visitas hoy</text>'
+  +'</svg>';
+}
+function animateLine(){
+ var p=panel.querySelector('#cl');if(!p)return;
+ var L=p.getTotalLength();
+ p.style.transition='none';p.style.strokeDasharray=L;p.style.strokeDashoffset=L;
+ p.getBoundingClientRect();
+ p.style.transition='stroke-dashoffset 700ms cubic-bezier(.22,.61,.36,1)';
+ p.style.strokeDashoffset='0';
+}
+function render(){
+ var r=R[sel];
+ panel.innerHTML='<div class="kick">Tu página sería</div>'
+  +'<h3 class="ptype">'+r.t+'</h3><p class="pdesc">'+r.d+'</p>'
+  +'<div class="stats">'
+  +'<div class="stat"><div class="lab">'+LC+'Visitas al mes</div><div class="num" id="n1">0</div></div>'
+  +'<div class="stat"><div class="lab">'+MB+'Escaneos QR + toques NFC</div><div class="num" id="n2">0</div></div>'
+  +'<div class="stat"><div class="lab">'+LK+'Reseñas ganadas</div><div class="num" id="n3">0</div></div></div>'
+  +'<div class="chartbox"><div class="charthead"><span class="t">Flujo de personas a tu página</span>'
+  +'<span class="seg"><button class="'+(days===30?'on':'')+'" data-d="30">30 días</button><button class="'+(days===90?'on':'')+'" data-d="90">90 días</button></span></div>'
+  +renderChart(r,sel+2)
+  +'<p class="cap">Con el acceso a Google Analytics que te damos, ves de dónde viene cada visita: el QR de tu local, el NFC de tu mostrador, Google o redes sociales.</p></div>'
+  +'<div class="feats">'+r.f.map(function(x){return '<div class="feat">'+CK+'<span>'+x+'</span></div>'}).join('')+'</div>';
+ countUp(document.getElementById('n1'),r.v);
+ countUp(document.getElementById('n2'),r.e);
+ countUp(document.getElementById('n3'),r.r);
+ animateLine();
+ panel.querySelectorAll('.seg button').forEach(function(b){
+  b.onclick=function(){days=+b.dataset.d;render()};
+ });
+}
+R.forEach(function(r,i){
+ var b=document.createElement('button');
+ b.className='chip'+(i===0?' on':'');
+ b.innerHTML='<span>'+r.n+'</span>';
+ b.onclick=function(){
+  if(sel===i)return;
+  sel=i;
+  chipsEl.querySelectorAll('.chip').forEach(function(c){c.classList.remove('on')});
+  b.classList.add('on');
+  panel.classList.add('fade');
+  setTimeout(function(){panel.classList.remove('fade');render()},140);
+ };
+ chipsEl.appendChild(b);
+});
+render();
+</script>
+</body>
+</html>
