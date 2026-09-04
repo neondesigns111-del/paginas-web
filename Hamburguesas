@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TIZÓN — Parrilla de autor</title>
+<meta name="description" content="TIZÓN. Hamburguesas a las brasas de quebracho. Carne madurada, pan horneado a diario, cuatro recetas fijas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --bg-elevated: #111111;
+    --bg-card: #141414;
+    --line: rgba(244,241,234,0.08);
+    --line-hover: rgba(244,241,234,0.18);
+    --ink: #f4f1ea;
+    --ink-dim: #a39e93;
+    --ink-faint: #6b655c;
+    --accent: #c17f45;
+    --accent-bright: #d9965a;
+    --accent-deep: #8a5a2b;
+    --maxw: 1200px;
+    --pad: clamp(28px, 6vw, 80px);
+    --radius: 2px;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    --ease-slow: cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display: block; }
+  a { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; background: none; border: none; color: inherit; }
+  ul { list-style: none; }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+  }
+
+  :focus-visible { outline: 1px solid var(--accent); outline-offset: 4px; }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding-left: var(--pad);
+    padding-right: var(--pad);
+  }
+
+  /* ---------- GRAIN ---------- */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.025;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    mix-blend-mode: overlay;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 32px var(--pad);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: padding 0.5s var(--ease), background-color 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
+  }
+
+  .nav.is-scrolled {
+    padding-top: 16px;
+    padding-bottom: 16px;
+    background: rgba(10,10,10,0.85);
+    backdrop-filter: blur(16px) saturate(1.2);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .nav-logo span { color: var(--accent); font-weight: 500; }
+
+  .nav-links {
+    display: flex;
+    gap: 44px;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    position: relative;
+    padding-bottom: 2px;
+    transition: color 0.4s var(--ease);
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    left: 50%; right: 50%;
+    bottom: -2px;
+    height: 1px;
+    background: var(--accent);
+    transition: left 0.4s var(--ease), right 0.4s var(--ease);
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+  .nav-links a:hover::after,
+  .nav-links a.is-active::after { left: 0; right: 0; }
+  .nav-links a.is-active { color: var(--ink); }
+
+  .nav-cta {
+    border: 1px solid var(--line-hover);
+    padding: 10px 24px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease), color 0.4s var(--ease);
+  }
+
+  .nav-cta:hover {
+    border-color: var(--accent);
+    background: rgba(193,127,69,0.08);
+    color: var(--accent-bright);
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .nav-toggle span {
+    width: 20px; height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.4s var(--ease), opacity 0.3s var(--ease);
+  }
+
+  .nav-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .nav-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  .mobile-drawer {
+    position: fixed;
+    inset: 0;
+    background: var(--bg);
+    z-index: 90;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    transform: translateY(-100%);
+    opacity: 0;
+    transition: transform 0.6s var(--ease-slow), opacity 0.4s var(--ease);
+    visibility: hidden;
+  }
+
+  .mobile-drawer.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .mobile-drawer a {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    position: relative;
+    min-height: 100svh;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+    transform: scale(1.08);
+    transition: transform 1.8s var(--ease-slow);
+  }
+
+  .hero.is-ready .hero-img { transform: scale(1); }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.2) 35%, rgba(10,10,10,0.92) 90%),
+      linear-gradient(90deg, rgba(10,10,10,0.7) 0%, rgba(10,10,10,0.1) 50%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: var(--pad);
+    padding-bottom: clamp(60px, 10vw, 120px);
+    max-width: 720px;
+  }
+
+  .hero-overline {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(12px);
+    transition: opacity 0.8s var(--ease) 0.2s, transform 0.8s var(--ease) 0.2s;
+  }
+
+  .hero.is-ready .hero-overline { opacity: 1; transform: translateY(0); }
+
+  .hero-title {
+    font-size: clamp(2.8rem, 7vw, 5.6rem);
+    line-height: 1.05;
+    font-weight: 500;
+  }
+
+  .hero-title .row {
+    display: block;
+    overflow: hidden;
+  }
+
+  .hero-title .row span {
+    display: block;
+    transform: translateY(110%);
+    transition: transform 1s var(--ease);
+  }
+
+  .hero.is-ready .hero-title .row span { transform: translateY(0); }
+  .hero.is-ready .hero-title .row:nth-child(1) span { transition-delay: 0.35s; }
+  .hero.is-ready .hero-title .row:nth-child(2) span { transition-delay: 0.45s; }
+  .hero.is-ready .hero-title .row:nth-child(3) span { transition-delay: 0.55s; color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 32px;
+    max-width: 420px;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s var(--ease) 0.8s, transform 0.9s var(--ease) 0.8s;
+  }
+
+  .hero.is-ready .hero-sub { opacity: 1; transform: translateY(0); }
+
+  .hero-actions {
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.9s var(--ease) 1s, transform 0.9s var(--ease) 1s;
+  }
+
+  .hero.is-ready .hero-actions { opacity: 1; transform: translateY(0); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 16px 36px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: var(--radius);
+    display: inline-block;
+    transition: background-color 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+
+  .btn-primary:hover {
+    background: var(--accent-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(193,127,69,0.2);
+  }
+
+  .link-underline {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    border-bottom: 1px solid var(--line-hover);
+    padding-bottom: 4px;
+    transition: color 0.4s var(--ease), border-color 0.4s var(--ease);
+  }
+
+  .link-underline:hover { color: var(--ink); border-color: var(--accent); }
+
+  .hero-meta {
+    position: absolute;
+    z-index: 2;
+    right: var(--pad);
+    bottom: clamp(60px, 10vw, 120px);
+    text-align: right;
+    display: none;
+  }
+
+  .hero-meta-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 8px;
+  }
+
+  .hero-meta-value {
+    font-size: 0.85rem;
+    color: var(--ink-dim);
+    line-height: 1.8;
+  }
+
+  @media (min-width: 900px) { .hero-meta { display: block; } }
+
+  /* ---------- SECTIONS ---------- */
+  section { position: relative; }
+  .section-pad { padding: clamp(100px, 14vw, 180px) 0; }
+
+  .section-head {
+    max-width: 560px;
+    margin-bottom: clamp(56px, 7vw, 88px);
+  }
+
+  .section-head h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    line-height: 1.08;
+    font-weight: 500;
+  }
+
+  .section-head p {
+    margin-top: 20px;
+    color: var(--ink-dim);
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 440px;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  /* ---------- MENU ---------- */
+  .menu { background: var(--bg); }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+    background: var(--line);
+  }
+
+  .menu-card {
+    background: var(--bg);
+    padding: clamp(32px, 4vw, 56px);
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    transition: background 0.5s var(--ease);
+    cursor: pointer;
+  }
+
+  .menu-card:hover { background: var(--bg-elevated); }
+
+  .menu-card-img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--bg-card);
+  }
+
+  .menu-card-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s var(--ease);
+  }
+
+  .menu-card:hover .menu-card-img img { transform: scale(1.05); }
+
+  .menu-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .menu-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.3rem, 2.2vw, 1.8rem);
+    font-weight: 500;
+  }
+
+  .menu-card-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  .menu-card-tagline {
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--ink-dim);
+    margin-top: 4px;
+  }
+
+  .menu-card-desc {
+    color: var(--ink-faint);
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 48ch;
+  }
+
+  .menu-card-toggle {
+    margin-top: auto;
+    padding-top: 20px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    border-top: 1px solid var(--line);
+    width: 100%;
+    text-align: left;
+    transition: color 0.4s var(--ease), border-color 0.4s var(--ease);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .menu-card-toggle::after {
+    content: "+";
+    font-size: 1rem;
+    transition: transform 0.4s var(--ease);
+  }
+
+  .menu-card.is-open .menu-card-toggle::after { transform: rotate(45deg); }
+  .menu-card:hover .menu-card-toggle { color: var(--ink); border-color: var(--line-hover); }
+
+  .menu-card-extra {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.5s var(--ease);
+  }
+
+  .menu-card.is-open .menu-card-extra { grid-template-rows: 1fr; }
+
+  .menu-card-extra-inner {
+    overflow: hidden;
+  }
+
+  .menu-card-extra-inner p {
+    padding-top: 16px;
+    color: var(--ink-faint);
+    font-size: 0.85rem;
+    font-weight: 300;
+    line-height: 1.7;
+    font-style: italic;
+  }
+
+  @media (max-width: 800px) {
+    .menu-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- HISTORIA ---------- */
+  .historia { background: var(--bg-elevated); }
+
+  .historia-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(40px, 7vw, 100px);
+    align-items: center;
+  }
+
+  .historia-img {
+    border-radius: var(--radius);
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    position: relative;
+  }
+
+  .historia-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 60%, rgba(10,10,10,0.4) 100%);
+  }
+
+  .historia-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .historia-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3.2vw, 2.8rem);
+    line-height: 1.2;
+    font-weight: 500;
+    font-style: italic;
+  }
+
+  .historia-quote span { color: var(--accent); font-style: normal; }
+
+  .historia-text {
+    margin-top: 28px;
+    color: var(--ink-dim);
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.8;
+    max-width: 44ch;
+  }
+
+  .historia-text + .historia-text { margin-top: 16px; }
+
+  @media (max-width: 800px) {
+    .historia-grid { grid-template-columns: 1fr; }
+    .historia-img { aspect-ratio: 16/10; order: -1; }
+  }
+
+  /* ---------- VISITANOS ---------- */
+  .visitanos { background: var(--bg); }
+
+  .visitanos-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: clamp(48px, 7vw, 100px);
+    align-items: start;
+  }
+
+  .info-block + .info-block { margin-top: 48px; }
+
+  .info-label {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 12px;
+  }
+
+  .info-value {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.8;
+    color: var(--ink-dim);
+  }
+
+  .hours-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.9rem;
+    font-weight: 300;
+  }
+
+  .hours-row span:first-child { color: var(--ink-dim); }
+  .hours-row span:last-child { color: var(--ink-faint); }
+
+  .form-card {
+    background: var(--bg-elevated);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: clamp(32px, 4vw, 48px);
+  }
+
+  .form-row { margin-bottom: 24px; }
+
+  .form-row label {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 10px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-row input,
+  .form-row textarea {
+    width: 100%;
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 14px 16px;
+    color: var(--ink);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 300;
+    transition: border-color 0.4s var(--ease), background 0.4s var(--ease);
+  }
+
+  .form-row input::placeholder,
+  .form-row textarea::placeholder { color: var(--ink-faint); opacity: 0.5; }
+
+  .form-row input:focus,
+  .form-row textarea:focus {
+    border-color: var(--accent);
+    background: rgba(193,127,69,0.03);
+    outline: none;
+  }
+
+  .form-row.has-error input { border-color: #b44; }
+
+  .form-error {
+    display: none;
+    color: #b44;
+    font-size: 0.78rem;
+    margin-top: 8px;
+    font-weight: 400;
+  }
+
+  .form-row.has-error .form-error { display: block; }
+
+  .btn-submit {
+    width: 100%;
+    background: var(--accent);
+    color: var(--bg);
+    border: none;
+    padding: 16px;
+    border-radius: var(--radius);
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: background-color 0.4s var(--ease), transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  }
+
+  .btn-submit:hover {
+    background: var(--accent-bright);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(193,127,69,0.18);
+  }
+
+  .form-success {
+    display: none;
+    text-align: center;
+    padding: 40px 20px;
+  }
+
+  .form-success.is-visible { display: block; }
+  .form-card.is-sent .form-fields { display: none; }
+
+  .form-success h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  .form-success p { color: var(--ink-dim); font-size: 0.95rem; font-weight: 300; line-height: 1.7; }
+
+  @media (max-width: 800px) {
+    .visitanos-grid { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 480px) {
+    .form-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    background: var(--bg-elevated);
+    border-top: 1px solid var(--line);
+    padding: 56px 0 36px;
+  }
+
+  .footer-top {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 24px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .footer-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 32px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+
+  .footer-links a { transition: color 0.4s var(--ease); }
+  .footer-links a:hover { color: var(--ink); }
+
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    padding-top: 24px;
+    font-size: 0.75rem;
+    color: var(--ink-faint);
+    font-weight: 300;
+  }
+
+  /* ---------- SCROLL REVEAL ---------- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 800px) {
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-toggle { display: flex; }
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+  <a href="#top" class="nav-logo">TIZ<span>Ó</span>N</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#carta" data-nav>La carta</a></li>
+    <li><a href="#historia" data-nav>Historia</a></li>
+    <li><a href="#visitanos" data-nav>Visitanos</a></li>
+  </ul>
+  <div style="display:flex; align-items:center; gap:20px;">
+    <a href="#visitanos" class="nav-cta">Reservar</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false" aria-controls="mobileDrawer">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <a href="#carta">La carta</a>
+  <a href="#historia">Historia</a>
+  <a href="#visitanos">Visitanos</a>
+</div>
+
+<section class="hero" id="top">
+  <img class="hero-img" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1800&auto=format&fit=crop" alt="Brasas de parrilla con fuego intenso sobre carbón">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-overline">Parrilla de autor — Palermo</p>
+    <h1 class="hero-title">
+      <span class="row"><span>El fuego</span></span>
+      <span class="row"><span>no negocia</span></span>
+      <span class="row"><span>con el sabor.</span></span>
+    </h1>
+    <p class="hero-sub">Carne madurada, pan horneado cada mañana y brasas de quebracho como único método. Cuatro recetas fijas, ninguna a medias.</p>
+    <div class="hero-actions">
+      <a href="#carta" class="btn-primary">Ver la carta</a>
+      <a href="#visitanos" class="link-underline">Reservar mesa</a>
+    </div>
+  </div>
+  <div class="hero-meta">
+    <div class="hero-meta-label">Ubicación</div>
+    <div class="hero-meta-value">Gorriti 4820, Palermo<br>Martes a domingo, desde las 12:00</div>
+  </div>
+</section>
+
+<section class="menu section-pad" id="carta">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-label">La carta</span>
+      <h2>Cuatro recetas, ningún atajo.</h2>
+      <p>No hay carta de temporada ni especiales del chef. Elegimos cuatro y las sostenemos, todos los días, de la misma forma.</p>
+    </div>
+
+    <div class="menu-grid" id="menuGrid">
+
+      <div class="menu-card reveal">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?q=80&w=900&auto=format&fit=crop" alt="El Fundador: doble smash con cheddar derretido sobre superficie oscura">
+        </div>
+        <div>
+          <div class="menu-card-top">
+            <span class="menu-card-name">El Fundador</span>
+            <span class="menu-card-price">$8.900</span>
+          </div>
+          <p class="menu-card-tagline">La receta original, sin vueltas.</p>
+          <p class="menu-card-desc">Doble smash de 120 g, cheddar añejo, cebolla caramelizada a fuego lento y salsa ahumada de la casa, en pan de papa dorado en manteca.</p>
+        </div>
+        <button class="menu-card-toggle" aria-expanded="false">Conocé su historia</button>
+        <div class="menu-card-extra">
+          <div class="menu-card-extra-inner">
+            <p>Es la hamburguesa con la que abrimos, en 2016, en una parrilla de dos mesas. Nunca la tocamos: si algo funciona, no se arregla.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card reveal">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=900&auto=format&fit=crop" alt="La Provocadora: hamburguesa doble con bacon crujiente y queso fundido">
+        </div>
+        <div>
+          <div class="menu-card-top">
+            <span class="menu-card-name">La Provocadora</span>
+            <span class="menu-card-price">$9.800</span>
+          </div>
+          <p class="menu-card-tagline">Para quienes piden picante sin preguntar.</p>
+          <p class="menu-card-desc">Carne de novillo, bacon ahumado veinte horas, provoleta a la parrilla, rúcula fresca y chimichurri picante hecho a mano cada mañana.</p>
+        </div>
+        <button class="menu-card-toggle" aria-expanded="false">Conocé su historia</button>
+        <div class="menu-card-extra">
+          <div class="menu-card-extra-inner">
+            <p>El chimichurri lleva ají de nuestra huerta. Avisamos del picor, pero rara vez alguien nos hace caso.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card reveal">
+        <div class="menu-card-img">
+          <img src="https://images.pexels.com/photos/21820165/pexels-photo-21820165.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Trufa y Hongos: hamburguesa elegante con hongos salteados y rúcula">
+        </div>
+        <div>
+          <div class="menu-card-top">
+            <span class="menu-card-name">Trufa &amp; Hongos</span>
+            <span class="menu-card-price">$11.200</span>
+          </div>
+          <p class="menu-card-tagline">La favorita de quienes no piden término medio.</p>
+          <p class="menu-card-desc">Medallón de carne madurada, hongos de pino salteados en manteca, mayonesa de trufa negra y queso gruyère fundido bajo la parrilla.</p>
+        </div>
+        <button class="menu-card-toggle" aria-expanded="false">Conocé su historia</button>
+        <div class="menu-card-extra">
+          <div class="menu-card-extra-inner">
+            <p>Compramos los hongos por kilo, una vez por semana, a un solo productor. Cuando se terminan, se termina la hamburguesa por ese día.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="menu-card reveal">
+        <div class="menu-card-img">
+          <img src="https://images.unsplash.com/photo-1572802419224-296b0aeee0d9?q=80&w=900&auto=format&fit=crop" alt="Brasas del Sur: hamburguesa simple sobre bandeja de madera oscura">
+        </div>
+        <div>
+          <div class="menu-card-top">
+            <span class="menu-card-name">Brasas del Sur</span>
+            <span class="menu-card-price">$10.500</span>
+          </div>
+          <p class="menu-card-tagline">La más honesta: carne, fuego y pan. Nada más.</p>
+          <p class="menu-card-desc">Carne de pastura madurada 21 días, cebolla morada tostada directo al carbón y pan de papa apenas tostado en manteca de hierbas.</p>
+        </div>
+        <button class="menu-card-toggle" aria-expanded="false">Conocé su historia</button>
+        <div class="menu-card-extra">
+          <div class="menu-card-extra-inner">
+            <p>Ninguna salsa. La probamos así primero, en la cocina, y decidimos no arruinarla.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="historia section-pad" id="historia">
+  <div class="wrap historia-grid">
+    <div class="historia-img reveal">
+      <img src="https://images.unsplash.com/photo-1558030006-450675393462?q=80&w=1200&auto=format&fit=crop" alt="Hamburguesa en construcción, capas de ingredientes suspendidas en el aire">
+    </div>
+    <div class="reveal">
+      <span class="section-label">Nuestra historia</span>
+      <p class="historia-quote">No apuramos el fuego. <span>El fuego apura al sabor.</span></p>
+      <p class="historia-text">TIZÓN nació de una idea simple: una parrilla no necesita más de cuatro hamburguesas si las cuatro están bien hechas. Todo se cocina sobre brasas de quebracho, sin gas y sin atajos.</p>
+      <p class="historia-text">El pan se hornea todas las mañanas en el local. La carne se compra entera y madura en cámara propia. Lo que no podemos controlar, no entra a la cocina.</p>
+    </div>
+  </div>
+</section>
+
+<section class="visitanos section-pad" id="visitanos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-label">Reservas</span>
+      <h2>Visitanos.</h2>
+      <p>Sin delivery propio, sin apuro. La mesa se disfruta acá.</p>
+    </div>
+
+    <div class="visitanos-grid">
+      <div class="reveal">
+        <div class="info-block">
+          <div class="info-label">Dirección</div>
+          <div class="info-value">Gorriti 4820, Palermo<br>Buenos Aires, Argentina</div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Horarios</div>
+          <div class="hours-row"><span>Martes a jueves</span><span>12:00 – 23:00</span></div>
+          <div class="hours-row"><span>Viernes y sábado</span><span>12:00 – 00:30</span></div>
+          <div class="hours-row"><span>Domingo</span><span>12:00 – 22:00</span></div>
+          <div class="hours-row"><span>Lunes</span><span>Cerrado</span></div>
+        </div>
+        <div class="info-block">
+          <div class="info-label">Contacto</div>
+          <div class="info-value">+54 9 11 2345-6789<br>@tizon.baires</div>
+        </div>
+      </div>
+
+      <div class="form-card reveal" id="formCard">
+        <div class="form-fields">
+          <form id="reserveForm" novalidate>
+            <div class="form-row" data-field="nombre">
+              <label for="f-nombre">Nombre</label>
+              <input type="text" id="f-nombre" name="nombre" autocomplete="name" placeholder="A nombre de quién">
+              <p class="form-error">Contanos a nombre de quién es la mesa.</p>
+            </div>
+            <div class="form-grid">
+              <div class="form-row" data-field="fecha">
+                <label for="f-fecha">Fecha</label>
+                <input type="date" id="f-fecha" name="fecha">
+                <p class="form-error">Elegí una fecha.</p>
+              </div>
+              <div class="form-row" data-field="hora">
+                <label for="f-hora">Hora</label>
+                <input type="time" id="f-hora" name="hora">
+                <p class="form-error">Elegí un horario.</p>
+              </div>
+            </div>
+            <div class="form-row" data-field="personas">
+              <label for="f-personas">Cantidad de personas</label>
+              <input type="number" id="f-personas" name="personas" min="1" max="12" placeholder="Ej: 4">
+              <p class="form-error">Decinos para cuántas personas es.</p>
+            </div>
+            <button type="submit" class="btn-submit">Confirmar reserva</button>
+          </form>
+        </div>
+        <div class="form-success" id="formSuccess">
+          <h3>Reserva recibida.</h3>
+          <p id="formSuccessDetail"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-logo">TIZ<span>Ó</span>N</div>
+      <ul class="footer-links">
+        <li><a href="#carta">La carta</a></li>
+        <li><a href="#historia">Historia</a></li>
+        <li><a href="#visitanos">Visitanos</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TIZÓN. Parrilla de autor, Palermo.</span>
+      <span>Gorriti 4820, Buenos Aires</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- Sticky nav ----
+  var nav = document.getElementById('siteNav');
+  function onScroll(){
+    if (window.scrollY > 60) { nav.classList.add('is-scrolled'); }
+    else { nav.classList.remove('is-scrolled'); }
+  }
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---- Mobile drawer ----
+  var toggle = document.getElementById('navToggle');
+  var drawer = document.getElementById('mobileDrawer');
+  function closeDrawer(){
+    drawer.classList.remove('is-open');
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+  toggle.addEventListener('click', function(){
+    var open = drawer.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeDrawer);
+  });
+
+  // ---- Hero entrance ----
+  var hero = document.querySelector('.hero');
+  requestAnimationFrame(function(){
+    setTimeout(function(){ hero.classList.add('is-ready'); }, 100);
+  });
+
+  // ---- Scrollspy ----
+  var navLinks = document.querySelectorAll('[data-nav]');
+  var sections = ['carta','historia','visitanos'].map(function(id){ return document.getElementById(id); });
+  if ('IntersectionObserver' in window){
+    var spy = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('is-active'); });
+          var match = document.querySelector('[data-nav][href="#' + entry.target.id + '"]');
+          if (match) { match.classList.add('is-active'); }
+        }
+      });
+    }, { rootMargin: '-40% 0px -40% 0px' });
+    sections.forEach(function(s){ if (s) { spy.observe(s); } });
+  }
+
+  // ---- Menu accordion ----
+  document.querySelectorAll('.menu-card').forEach(function(card){
+    var toggleBtn = card.querySelector('.menu-card-toggle');
+    toggleBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var isOpen = card.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggleBtn.textContent = isOpen ? 'Cerrar' : 'Conocé su historia';
+    });
+    card.addEventListener('click', function(){
+      var isOpen = card.classList.toggle('is-open');
+      toggleBtn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      toggleBtn.textContent = isOpen ? 'Cerrar' : 'Conocé su historia';
+    });
+  });
+
+  // ---- Scroll reveal ----
+  if ('IntersectionObserver' in window){
+    var revealObserver = new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if (entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function(el){
+      revealObserver.observe(el);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function(el){
+      el.classList.add('is-visible');
+    });
+  }
+
+  // ---- Reservation form ----
+  var form = document.getElementById('reserveForm');
+  var card = document.getElementById('formCard');
+  var successDetail = document.getElementById('formSuccessDetail');
+
+  function fieldRow(name){ return form.querySelector('[data-field="' + name + '"]'); }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var nombre = form.nombre.value.trim();
+    var fecha = form.fecha.value;
+    var hora = form.hora.value;
+    var personas = form.personas.value;
+
+    var valid = true;
+    [
+      ['nombre', nombre],
+      ['fecha', fecha],
+      ['hora', hora],
+      ['personas', personas]
+    ].forEach(function(pair){
+      var row = fieldRow(pair[0]);
+      if (!pair[1]){
+        row.classList.add('has-error');
+        valid = false;
+      } else {
+        row.classList.remove('has-error');
+      }
+    });
+
+    if (!valid) { return; }
+
+    var fechaLegible = fecha;
+    try {
+      var d = new Date(fecha + 'T00:00:00');
+      fechaLegible = d.toLocaleDateString('es-AR', { day: 'numeric', month: 'long' });
+    } catch(err){}
+
+    successDetail.textContent = 'Te esperamos, ' + nombre + ', el ' + fechaLegible + ' a las ' + hora + ' para ' + personas + (personas === '1' ? ' persona.' : ' personas.') + ' Te confirmamos por WhatsApp.';
+    card.classList.add('is-sent');
+    document.getElementById('formSuccess').classList.add('is-visible');
+  });
+
+})();
+</script>
+
+</body>
+</html>
